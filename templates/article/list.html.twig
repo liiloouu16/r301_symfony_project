@@ -1,0 +1,63 @@
+{% extends 'home.html.twig' %}
+
+{% block title %} Liste des Articles 📜 {% endblock %}
+
+{% block maincontent %}
+
+<div class="container mt-4">
+
+    <h1 class="mb-4">Liste des articles 📜</h1>
+
+    <a href="{{ path('new_article') }}" class="btn btn-primary">Rédiger un nouvel article</a>
+
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Publié</th>
+                <th>Action</th>
+                <th>Modifier l'article</th>
+                <th>Supprimer l'article</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titre }}</td>
+                <td>
+                    {% if (article.publie)%}
+                        {{ ux_icon('bi:check2-square', { style: 'width: 40px; color: grey; display: block; margin: auto;' }) }}
+                    {% else %}
+                        {{ ux_icon('bi:square', { style: 'width: 35px; color: grey; display: block; margin: auto;' }) }}
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('show_article', {'id': article.id}) }}">
+                        {{ ux_icon('mdi-light:eye', { style: 'width: 40px; color: grey; display: block; margin: auto;' }) }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('edit_article', {'id': article.id}) }}">
+                        {{ ux_icon('circum:edit', { style: 'width: 40px; color: grey; display: block; margin: auto;' }) }}
+                    </a>
+                </td>
+                <td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('delete_article', {'id': article.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
+                            {{ ux_icon('mdi-light:delete', { style: 'width: 40px; color: grey; display: block; margin: auto;' }) }}
+                        </a>
+                    {% else %}
+                        <span class="text-muted" title="Admins only">
+                            <p>Vous ne pouvez pas supprimer cet article en tant qu'utilisateur.</p>
+                        </span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Article généré !{% endblock %}
+
+{% block maincontent %}
+
+    <div class="container mt-4">
+
+        <h1>Article généré avec succès ! 🤩</h1>
+        <p>Un nouvel article a été créé avec l'ID : <strong>{{ articleId }}</strong></p>
+        <a href="{{ path('show_article', {'id': articleId}) }}" class="btn btn-primary mt-3">Voir l'article généré</a>
+        <a href="{{ path('list_article') }}" class="btn btn-primary mt-3">Retour à la liste des articles</a>
+    </div>
+
+{% endblock %}

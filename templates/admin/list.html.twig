@@ -1,0 +1,52 @@
+{% extends 'home.html.twig' %}
+
+{% block title %} Liste des utilisateurs 🧑‍💻 {% endblock %}
+
+{% block maincontent %}
+
+<div class="container mt-4">
+
+    <h1 class="mb-4">Liste des utilisateurs 🧑‍💻</h1>
+
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>Identifiant</th>
+                <th>Mail</th>
+                <th>Mot de passe</th>
+                <th>Rôle</th>
+                <th>Modifier l'utilisateur</th>
+                <th>Supprimer l'utilisateur</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.roles|join(', ') }}</td>
+
+                <td>
+                    <a href="{{ path('edit_user', {'id': user.id}) }}">
+                        {{ ux_icon('circum:edit', { style: 'width: 40px; color: grey; display: block; margin: auto;' }) }}
+                    </a>
+                </td>
+                <td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('delete_user', {'id': user.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet user ?');">
+                            {{ ux_icon('mdi-light:delete', { style: 'width: 40px; color: grey; display: block; margin: auto;' }) }}
+                        </a>
+                    {% else %}
+                        <span class="text-muted" title="Admins only">
+                            <p>Vous ne pouvez pas supprimer cet user en tant qu'utilisateur.</p>
+                        </span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

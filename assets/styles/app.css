@@ -1,0 +1,15 @@
+body {
+    background-color: lightgray;
+}
+
+.message{
+    position: fixed;
+    top: 60px;
+    right: 5px;
+    min-width: 200px;
+    text-align: center;
+}
+
+.alert alert-danger{
+    background-color: red;
+}

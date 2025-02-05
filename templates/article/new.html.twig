@@ -1,0 +1,38 @@
+{% extends 'home.html.twig' %}
+
+{% block title %} Rédaction d'un article 📝 {% endblock %}
+
+{% block maincontent %}
+
+    <div class="container mt-4">
+
+        <h1 class="mb-4">Rédiger un nouvel article 📝</h1>
+        
+        {{ form_start(form) }}
+
+            <div class="mb-3">
+                {{ form_label(form.titre, 'Titre de l\'article') }}
+                {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.texte, 'Contenu de l\'article') }}
+                {{ form_widget(form.texte, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+            </div>
+
+            <div class="mb-3 form-check">
+                {{ form_widget(form.publie, {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(form.publie, 'Publié ?', {'attr': {'class': 'form-check-label'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.date, 'Date de publication') }}
+                {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enregistrer l'article</button>
+            
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'home.html.twig' %}
+
+{% block title %} Détail de l'article {{ article.id }} 📝{% endblock %}
+
+{% block maincontent %}
+<style>
+    .article-container { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .article-container code { background: #F5F5F5; padding: 2px 6px; }
+    .article-content { background: #F5F5F5; padding: 15px; border-radius: 5px; }
+</style>
+
+<div class="article-container">
+    <h1>{{ article.titre }} 📝</h1>
+    <br>
+    <p><strong>ID :</strong> {{ article.id }}</p>
+    <p><strong>Publié :</strong> {{ article.publie ? 'Oui ✅' : 'Non ❌' }}</p>
+    <p><strong>Date de publication :</strong> {{ article.date|date('d/m/Y H:i') }}</p>
+
+    <div class="article-content">
+        <h3>Contenu :</h3>
+        <p>{{ article.texte|raw }}</p>
+    </div>
+
+    <br>
+    <a href="{{ path('list_article') }}" class="btn btn-primary">Retour à la liste des articles</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('delete_article', {'id': article.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
+            Supprimer cet article
+        </a>
+    {% else %}
+        <span class="text-muted" title="Admins only">
+            <p>Vous ne pouvez pas supprimer cet article en tant qu'utilisateur.</p>
+        </span>
+    {% endif %}
+
+
+{% endblock %}

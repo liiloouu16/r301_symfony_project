@@ -1,0 +1,33 @@
+{% extends 'home.html.twig' %}
+
+{% block title %} Modifier l'utilisateur {{ user.id }} 🖊️{% endblock %}
+
+{% block maincontent %}
+
+    <div class="container mt-4">
+
+        <h1 class="mb-4"> Modifier l'utilisateur {{ user.id }} 🖊️</h1>
+        
+        {{ form_start(form) }}
+
+            <div class="mb-3">
+                {{ form_label(form.email, 'Adresse e-mail de l\'utilisateur') }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.password, 'Mot de passe de l\'utilisateur') }}
+                {{ form_widget(form.password, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.roles, 'Rôles de l\'utilisateur') }}
+                {{ form_widget(form.roles, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}
