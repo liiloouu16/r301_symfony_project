@@ -22,6 +22,7 @@ class ArticleController extends AbstractController
 
     //Génération d'un article
     #[Route('/article/generate', name: 'generate_article')]
+    #[IsGranted('ROLE_USER', statusCode: 403, message: 'You must be logged in.')]
     public function generateArticle(EntityManagerInterface $entityManager): Response {
         $article = new Article();
         $str_now = date('Y-m-d H:i:s', time());
@@ -69,6 +70,7 @@ class ArticleController extends AbstractController
     
     //Créer un article avec le formulaire
     #[Route('/article/new', name: 'new_article')]
+    #[IsGranted('ROLE_USER', statusCode: 403, message: 'You must be logged in.')]
     public function newArticle(Request $request, EntityManagerInterface $entityManager): Response{
         //Création d'un article avec des valeurs par défaut
         $article = new Article();
@@ -127,6 +129,7 @@ class ArticleController extends AbstractController
 
     //Supprime un article
     #[Route('/article/delete/{id}', name: 'delete_article')]
+    #[IsGranted('ROLE_ARTICLE_ADMIN', statusCode: 403, message: 'Vous ne pouvez pas supprimer sans le role ARTICLE_ADMIN.')]
     public function deleteArticle(EntityManagerInterface $entityManager, int $id): Response{
         $repository = $entityManager->getRepository(Article::class);
         $article = $repository->find($id);

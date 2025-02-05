@@ -32,12 +32,13 @@
             <li class="nav-item dropdown">
               {% if app.user %}
                   <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Authentification
+                  Mon Compte
                   </a>
                   <div class="dropdown-menu" aria-labelledby="userDropdown">
                       <a class="dropdown-item" href="#">Bienvenue {{ app.user.email }}</a>
                       <a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
                       <a class="dropdown-item" href="/admin/list">Gestion des utilisateurs</a>
+                      <a class="dropdown-item" href="/profil">Votre profil</a>
                   </div>
               {% else %}
                   <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,6 +48,7 @@
                       <a class="dropdown-item" href="{{ path('app_register') }}">S'enregistrer</a>
                       <a class="dropdown-item" href="{{ path('app_login') }}">Se connecter</a>
                       <a class="dropdown-item" href="/admin/list">Gestion des utilisateurs</a>
+                    <a class="dropdown-item" href="/profil">Votre profil</a>
                   </div>
               {% endif %}
             </li>
